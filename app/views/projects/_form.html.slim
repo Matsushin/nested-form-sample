@@ -1,0 +1,20 @@
+= simple_nested_form_for @project do |f|
+  - if @project.errors.any?
+    #error_explanation
+      .alert.alert-danger
+        - @project.errors.full_messages.each do |message|
+          p = message
+
+  .field
+    .row
+      .col-md-8
+        = f.input :title, input_html: {class: 'form-control'}, error: false
+        = f.fields_for :tasks do |task_form|
+          .form-group
+            .input-group
+              = task_form.input :name, placeholder: 'タスク', label: false, input_html: {class: 'form-control'}, error: false
+              span.input-group-btn
+                = task_form.link_to_remove "削除", class: 'btn btn-danger'
+        = f.link_to_add "タスクを追加する", :tasks, class: 'btn btn-success'
+        .btn-group = f.submit "プロジェクトを更新する", class: 'btn btn-primary'
+br

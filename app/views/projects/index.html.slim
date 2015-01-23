@@ -1,0 +1,22 @@
+h1 プロジェクト一覧
+
+.row
+  .panel.panel-default
+    .panel-heading タイトル
+    table.table
+      tbody
+        - @projects.each do |project|
+          tr
+            td = project.title
+            td.text-right
+              .btn-group = link_to '詳細', project, class: 'btn btn-default'
+              .btn-group = link_to '変更', edit_project_path(project), class: 'btn btn-default'
+              .btn-group = link_to '削除', project, class: 'btn btn-danger', data: {:confirm => '本当に削除しますか？'}, :method => :delete
+= paginate @projects
+
+br
+
+= link_to '新規プロジェクト', new_project_path, class: 'btn btn-primary'
+
+br
+br

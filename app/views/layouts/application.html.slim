@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title NestedFormSample
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand Nested Form Sample
+        #navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li.active
+              = link_to 'Top', root_path
+          = search_form_for @q, url: projects_path, class: 'navbar-form navbar-right' do |f|
+            .form-group
+              = f.search_field :title_cont, placeholder: 'Search...', class: 'form-control'
+            = button_tag "プロジェクト検索", class: 'btn btn-success'
+
+    .container.container-main
+      = yield

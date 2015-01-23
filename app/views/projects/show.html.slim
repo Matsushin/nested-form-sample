@@ -1,0 +1,15 @@
+- if notice.present?
+  p#notice.alert.alert-success = notice
+
+.row
+  .panel.panel-default
+    .panel-heading = @project.title
+    table.table
+      tbody
+        - @project.tasks.each do |task|
+          tr
+            td = task.name
+
+.btn-group role='group'
+  = link_to '編集', edit_project_path(@project), class: 'btn btn-default'
+  = link_to '戻る', projects_path, class: 'btn btn-default'
